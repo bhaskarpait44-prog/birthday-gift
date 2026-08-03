@@ -1,0 +1,11 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+*_淘汰
+ehthumbs.db
+Thumbs.db
+
+# Node / Temp files
+node_modules/
+npm-debug.log*
+.vercel

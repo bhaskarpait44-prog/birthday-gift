@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Happy Birthday ❤️</title>
+
+<!-- Fast Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Canvas Confetti CDN -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+<style>
+  * {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #fff0f6 0%, #ffe4ef 50%, #ffd6ea 100%);
+    min-height: 100vh;
+  }
+
+  .font-pacifico { font-family: 'Pacifico', cursive; }
+
+  /* Mobile Optimized Glassmorphism */
+  .glass {
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+
+  .glass-modal {
+    background: linear-gradient(rgba(255, 240, 245, 0.84), rgba(255, 240, 245, 0.84)), url('bh.jpg') center/cover no-repeat;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(244, 114, 182, 0.35);
+  }
+
+  /* Performance-optimized Floating Particles */
+  .heart-particle {
+    position: fixed;
+    bottom: -30px;
+    color: #ec4899;
+    animation: floatUp 8s linear infinite;
+    opacity: 0.45;
+    pointer-events: none;
+    will-change: transform, opacity;
+    z-index: 1;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(0.7); opacity: 0.5; }
+    50% { opacity: 0.7; }
+    100% { transform: translateY(-115vh) scale(1.2); opacity: 0; }
+  }
+
+  .balloon {
+    position: absolute;
+    width: 44px;
+    height: 58px;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    cursor: pointer;
+    animation: floatBalloon 6s ease-in-out infinite alternate;
+    box-shadow: inset -4px -4px 8px rgba(0,0,0,0.12);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 5;
+    will-change: transform;
+  }
+  .balloon::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 14px;
+    background: rgba(0,0,0,0.2);
+  }
+  .balloon:active { transform: scale(1.15); }
+
+  @keyframes floatBalloon {
+    0% { transform: translateY(0px) rotate(-3deg); }
+    100% { transform: translateY(-20px) rotate(3deg); }
+  }
+
+  /* Interactive Gift Box */
+  .gift-box {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #ec4899, #db2777);
+    border-radius: 16px;
+    box-shadow: 0 15px 30px rgba(236, 72, 153, 0.35);
+    transition: transform 0.3s ease;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+  .gift-box:hover, .gift-box:active {
+    transform: scale(1.06);
+  }
+  .gift-lid {
+    position: absolute;
+    top: -16px;
+    left: -8px;
+    width: 136px;
+    height: 30px;
+    background: linear-gradient(135deg, #f43f5e, #e11d48);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+    z-index: 2;
+  }
+  .gift-ribbon-v {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 100%;
+    background: #fde047;
+  }
+  .gift-ribbon-h {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 20px;
+    background: #fde047;
+  }
+  .gift-bow {
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 34px;
+    z-index: 3;
+  }
+
+  .open-lid {
+    transform: translateY(-80px) rotate(-20deg) scale(0.9);
+    opacity: 0;
+  }
+
+  /* Realistic Burning Candle Flame Structure */
+  .flame-container {
+    position: relative;
+    width: 16px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: -2px;
+  }
+
+  .flame-halo {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    bottom: -4px;
+    background: radial-gradient(circle, rgba(255, 180, 0, 0.5) 0%, rgba(255, 100, 0, 0.22) 50%, transparent 75%);
+    border-radius: 50%;
+    animation: haloPulse 1.2s infinite ease-in-out alternate;
+    pointer-events: none;
+  }
+
+  .flame-main {
+    position: absolute;
+    width: 14px;
+    height: 24px;
+    background: linear-gradient(to bottom, #ffffff 0%, #ffeb3b 25%, #ff9800 65%, #d84315 100%);
+    border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+    box-shadow: 0 0 12px #ff9800, 0 0 20px #ffeb3b;
+    animation: realFlameBurn 1s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    transform-origin: center bottom;
+  }
+
+  .flame-core {
+    position: absolute;
+    width: 6px;
+    height: 10px;
+    bottom: 2px;
+    background: linear-gradient(to top, #00d2ff 0%, #ffffff 70%);
+    border-radius: 50% 50% 40% 40%;
+    opacity: 0.95;
+    animation: coreFlicker 0.7s infinite alternate ease-in-out;
+  }
+
+  .candle-wick {
+    width: 2px;
+    height: 6px;
+    background: #2b2b2b;
+    border-radius: 1px;
+    margin: 0 auto;
+  }
+
+  @keyframes realFlameBurn {
+    0% { transform: scale(1) rotate(-1.5deg); }
+    25% { transform: scale(1.04, 0.96) rotate(2deg); }
+    50% { transform: scale(0.96, 1.05) rotate(-2deg); }
+    75% { transform: scale(1.03, 1.02) rotate(1.5deg); }
+    100% { transform: scale(1) rotate(-1.5deg); }
+  }
+
+  @keyframes haloPulse {
+    0% { opacity: 0.6; transform: scale(0.95); }
+    100% { opacity: 0.95; transform: scale(1.15); }
+  }
+
+  @keyframes coreFlicker {
+    0% { transform: scale(1); opacity: 0.9; }
+    100% { transform: scale(1.1); opacity: 1; }
+  }
+
+  /* Continuous Shake Animation Until Opened */
+  .animate-shake-until-open {
+    animation: continuousShake 1.8s ease-in-out infinite;
+  }
+
+  @keyframes continuousShake {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    12%, 36%, 60%, 84% { transform: scale(1.05) rotate(-3.5deg); }
+    24%, 48%, 72%, 96% { transform: scale(1.05) rotate(3.5deg); }
+  }
+</style>
+</head>
+
+<body class="flex flex-col items-center justify-between min-h-screen relative text-gray-800">
+
+  <!-- Background Floating Layer -->
+  <div id="hearts-container"></div>
+  <div id="balloons-container" class="fixed inset-0 pointer-events-none overflow-hidden z-10"></div>
+
+  <!-- MAIN HERO SECTION -->
+  <main class="w-full flex-1 flex flex-col items-center justify-center px-4 py-8 relative z-20 max-w-xl mx-auto">
+    <div class="glass rounded-3xl shadow-xl p-6 sm:p-10 w-full text-center border border-white/80 relative overflow-hidden my-auto">
+      
+      <!-- Ambient Glows -->
+      <div class="absolute -top-20 -left-20 w-40 h-40 bg-pink-400/25 rounded-full blur-2xl"></div>
+      <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-purple-400/25 rounded-full blur-2xl"></div>
+
+      <!-- Header Icon -->
+      <div class="relative inline-block mb-3">
+        <div class="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-tr from-pink-400 to-rose-400 rounded-full flex items-center justify-center text-4xl sm:text-5xl shadow-lg mx-auto ring-4 ring-white/80">
+          🎂
+        </div>
+        <span class="absolute -bottom-1 -right-1 bg-yellow-400 text-[10px] sm:text-xs font-bold text-gray-900 px-2.5 py-0.5 rounded-full shadow">
+          SPECIAL DAY ✨
+        </span>
+      </div>
+
+      <!-- Main Heading -->
+      <h1 class="text-4xl sm:text-6xl font-bold text-pink-600 mb-4 sm:mb-6 font-pacifico tracking-wide drop-shadow-sm">
+        Happy Birthday
+      </h1>
+
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
+        Dear <span class="text-pink-500 underline decoration-pink-300 decoration-wavy">Someone Special ❤️</span>
+      </h2>
+
+      <p class="text-gray-600 text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-6 font-light">
+        May your day be filled with love, laughter, happiness, 
+        beautiful memories, and endless smiles! You deserve every wonderful thing. ✨
+      </p>
+
+      <!-- OPEN SURPRISE BUTTON -->
+      <div class="mt-2">
+        <button id="open-surprise-btn" onclick="openSurpriseModal()" class="animate-shake-until-open w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 text-white rounded-full text-lg font-semibold shadow-xl shadow-pink-500/30 hover:scale-105 active:scale-95 transition duration-200 cursor-pointer">
+          <span class="text-xl">🎁</span>
+          <span>Open Your Surprise</span>
+          <svg class="w-5 h-5 text-yellow-300 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-4 text-center text-xs text-gray-500 relative z-20">
+    Crafted with ❤️ for a wonderful Birthday
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: LIGHTWEIGHT OPEN SURPRISE -->
+  <!-- ========================================================================= -->
+  <div id="surprise-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+    
+    <!-- Modal Card -->
+    <div class="glass-modal rounded-3xl shadow-2xl max-w-sm sm:max-w-md w-full p-5 sm:p-7 relative border border-pink-300 max-h-[90vh] overflow-y-auto transform scale-95 transition-all duration-300" id="surprise-card">
+      
+      <!-- Close Button (Inline SVG for Zero Dependency) -->
+      <button onclick="closeSurpriseModal()" aria-label="Close" class="absolute top-3.5 right-3.5 text-gray-500 hover:text-pink-600 p-2 rounded-full hover:bg-pink-100/60 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <!-- STAGE 1: UNWRAPPING THE GIFT -->
+      <div id="stage-unboxing" class="text-center py-4">
+        <h3 class="text-2xl font-bold text-pink-600 font-pacifico mb-1">Tap Your Gift! 🎁</h3>
+        <p class="text-gray-600 text-xs sm:text-sm mb-6">Touch the gift box to unwrap your birthday surprise!</p>
+
+        <!-- Gift Box Element -->
+        <div class="my-6" onclick="unwrapGift()">
+          <div class="gift-box animate-shake-until-open" id="gift-box-elem">
+            <div class="gift-lid" id="gift-lid-elem">
+              <div class="gift-bow">🎀</div>
+            </div>
+            <div class="gift-ribbon-v"></div>
+            <div class="gift-ribbon-h"></div>
+          </div>
+        </div>
+
+        <p class="text-xs text-pink-500 font-semibold animate-pulse mt-2">✨ Tap box to open ✨</p>
+      </div>
+
+      <!-- STAGE 2: MAKE A WISH CAKE & SURPRISE -->
+      <div id="stage-surprises" class="hidden text-center py-2">
+        
+        <!-- 3D Layer Cake -->
+        <div class="relative w-44 h-40 mx-auto my-3 flex flex-col items-center justify-end">
+          <!-- Candles Row -->
+          <div class="flex gap-6 mb-0.5 z-10">
+            <!-- Candle 1 -->
+            <div class="flex flex-col items-center">
+              <div class="flame-container">
+                <div class="flame-halo"></div>
+                <div class="flame-main"></div>
+                <div class="flame-core"></div>
+              </div>
+              <div class="candle-wick"></div>
+              <div class="w-2.5 h-9 bg-gradient-to-b from-yellow-200 to-yellow-400 rounded-t-sm border border-yellow-500 shadow-sm"></div>
+            </div>
+            <!-- Candle 2 -->
+            <div class="flex flex-col items-center">
+              <div class="flame-container">
+                <div class="flame-halo"></div>
+                <div class="flame-main"></div>
+                <div class="flame-core"></div>
+              </div>
+              <div class="candle-wick"></div>
+              <div class="w-2.5 h-11 bg-gradient-to-b from-pink-200 to-pink-400 rounded-t-sm border border-pink-500 shadow-sm"></div>
+            </div>
+            <!-- Candle 3 -->
+            <div class="flex flex-col items-center">
+              <div class="flame-container">
+                <div class="flame-halo"></div>
+                <div class="flame-main"></div>
+                <div class="flame-core"></div>
+              </div>
+              <div class="candle-wick"></div>
+              <div class="w-2.5 h-9 bg-gradient-to-b from-purple-200 to-purple-400 rounded-t-sm border border-purple-500 shadow-sm"></div>
+            </div>
+          </div>
+
+          <!-- Cake Top -->
+          <div class="w-36 h-10 bg-gradient-to-r from-pink-300 to-rose-300 rounded-t-xl border-t-2 border-white shadow-inner flex items-center justify-center">
+            <span class="text-[10px] text-pink-700 font-bold tracking-wider">HAPPY BIRTHDAY</span>
+          </div>
+          <!-- Cake Base -->
+          <div class="w-44 h-14 bg-gradient-to-r from-pink-400 to-rose-500 rounded-b-xl border-b-2 border-pink-600 shadow-md flex items-center justify-around px-3">
+            <span class="text-base">🍓</span>
+            <span class="text-base">🌸</span>
+            <span class="text-base">🍓</span>
+          </div>
+          <!-- Plate -->
+          <div class="w-52 h-2.5 bg-white/90 rounded-full shadow -mt-0.5 border border-pink-200"></div>
+        </div>
+
+        <!-- Secret Wish Message & Polaroid Photo Card -->
+        <div id="cake-wish-message" class="mt-4 p-5 bg-gradient-to-br from-pink-500 via-rose-500 to-purple-600 text-white rounded-3xl shadow-2xl text-center border border-white/40">
+          
+          <!-- Polaroid Photo Card with Click to View Fullscreen Lightbox -->
+          <div class="relative group cursor-pointer inline-block my-2" onclick="openPhotoLightbox()">
+            <div class="bg-white p-2.5 pb-3 rounded-xl shadow-xl transform -rotate-2 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300 border border-gray-100">
+              <!-- Heart Pin -->
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-pink-500 text-white rounded-full flex items-center justify-center text-xs shadow-md border-2 border-white">
+                ❤️
+              </div>
+              
+              <!-- Photo Image -->
+              <div class="w-36 h-44 sm:w-40 sm:h-48 rounded-lg overflow-hidden bg-gray-100">
+                <img src="bh.jpg" alt="Special Memory" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+              </div>
+
+              <!-- Caption -->
+              <p class="text-gray-700 font-pacifico text-xs sm:text-sm mt-2">Precious Moment ✨</p>
+            </div>
+            
+            <span class="block text-[10px] text-pink-100 opacity-90 mt-1">🔍 Tap photo to view full size</span>
+          </div>
+
+          <h5 class="text-xl sm:text-2xl font-bold font-pacifico mt-3 mb-1">🎉 Wish Granted! 🎉</h5>
+          <p class="text-xs sm:text-sm font-light leading-relaxed">
+            ✨ You are amazingly special.<br>
+            🌸 Stay happy, stay blessed & keep shining!<br>
+            💖 Happy Birthday!
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHOTO LIGHTBOX MODAL -->
+  <div id="photo-lightbox" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300" onclick="closePhotoLightbox()">
+    <div class="relative max-w-sm sm:max-w-md w-full p-2.5 bg-white rounded-3xl shadow-2xl transform scale-90 transition-all duration-300" id="lightbox-card" onclick="event.stopPropagation()">
+      <button onclick="closePhotoLightbox()" class="absolute -top-3 -right-3 bg-pink-500 text-white p-2 rounded-full shadow-lg hover:bg-pink-600 border-2 border-white transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      <img src="bh.jpg" alt="Full Memory" class="w-full h-auto rounded-2xl max-h-[75vh] object-contain shadow-md">
+      <p class="text-center font-pacifico text-pink-600 text-base py-3">Dear Someone Special ❤️</p>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT LOGIC (ULTRA LIGHTWEIGHT) -->
+  <!-- ========================================================================= -->
+  <script>
+    // Lightweight Particle Generators
+    function generateHearts() {
+      const container = document.getElementById("hearts-container");
+      for (let i = 0; i < 14; i++) {
+        const h = document.createElement("div");
+        h.className = "heart-particle";
+        h.innerHTML = "❤";
+        h.style.left = (Math.random() * 95) + "vw";
+        h.style.fontSize = (14 + Math.random() * 18) + "px";
+        h.style.animationDuration = (6 + Math.random() * 6) + "s";
+        h.style.animationDelay = (Math.random() * 4) + "s";
+        container.appendChild(h);
+      }
+    }
+    generateHearts();
+
+    function generateBalloons() {
+      const container = document.getElementById("balloons-container");
+      const colors = ['#f43f5e', '#ec4899', '#a855f7', '#3b82f6'];
+      const positions = [{l: '5%', t: '12%'}, {l: '82%', t: '15%'}, {l: '10%', t: '65%'}, {l: '80%', t: '68%'}];
+      
+      positions.forEach((pos, i) => {
+        const b = document.createElement("div");
+        b.className = "balloon pointer-events-auto";
+        b.style.backgroundColor = colors[i % colors.length];
+        b.style.left = pos.l;
+        b.style.top = pos.t;
+        b.style.animationDelay = (i * 0.7) + "s";
+
+        b.onclick = function() {
+          if (window.confetti) {
+            confetti({
+              particleCount: 20,
+              spread: 50,
+              origin: { x: parseFloat(pos.l) / 100, y: parseFloat(pos.t) / 100 }
+            });
+          }
+          b.style.transform = "scale(0)";
+          setTimeout(() => { b.style.transform = "scale(1)"; }, 4000);
+        };
+        container.appendChild(b);
+      });
+    }
+    generateBalloons();
+
+    // Modal Control
+    function openSurpriseModal() {
+      // Stop shaking button once clicked
+      const btn = document.getElementById("open-surprise-btn");
+      if (btn) btn.classList.remove("animate-shake-until-open");
+
+      const modal = document.getElementById("surprise-modal");
+      const card = document.getElementById("surprise-card");
+      modal.classList.remove("opacity-0", "pointer-events-none");
+      card.classList.remove("scale-95");
+      card.classList.add("scale-100");
+    }
+
+    function closeSurpriseModal() {
+      const modal = document.getElementById("surprise-modal");
+      const card = document.getElementById("surprise-card");
+      modal.classList.add("opacity-0", "pointer-events-none");
+      card.classList.remove("scale-100");
+      card.classList.add("scale-95");
+    }
+
+    // Gift Unwrapping
+    let isGiftOpened = false;
+    function unwrapGift() {
+      if (isGiftOpened) return;
+      isGiftOpened = true;
+
+      // Stop shaking box once opened
+      const giftBox = document.getElementById("gift-box-elem");
+      if (giftBox) giftBox.classList.remove("animate-shake-until-open");
+
+      document.getElementById("gift-lid-elem").classList.add("open-lid");
+
+      if (window.confetti) {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
+
+      setTimeout(() => {
+        document.getElementById("stage-unboxing").classList.add("hidden");
+        document.getElementById("stage-surprises").classList.remove("hidden");
+      }, 700);
+    }
+
+    // Candle Blowout Logic
+    let candlesBlown = { 1: false, 2: false, 3: false };
+
+    function blowCandle(id) {
+      if (candlesBlown[id]) return;
+      candlesBlown[id] = true;
+
+      document.getElementById(`flame-${id}`).classList.add("hidden");
+      document.getElementById(`smoke-${id}`).classList.remove("hidden");
+
+      if (candlesBlown[1] && candlesBlown[2] && candlesBlown[3]) {
+        setTimeout(() => {
+          document.getElementById("cake-wish-message").classList.remove("hidden");
+          if (window.confetti) {
+            confetti({
+              particleCount: 100,
+              spread: 80,
+              origin: { y: 0.55 }
+            });
+          }
+        }, 400);
+      }
+    }
+
+    // Photo Lightbox Controls
+    function openPhotoLightbox() {
+      const modal = document.getElementById("photo-lightbox");
+      const card = document.getElementById("lightbox-card");
+      modal.classList.remove("opacity-0", "pointer-events-none");
+      card.classList.remove("scale-90");
+      card.classList.add("scale-100");
+    }
+
+    function closePhotoLightbox() {
+      const modal = document.getElementById("photo-lightbox");
+      const card = document.getElementById("lightbox-card");
+      modal.classList.add("opacity-0", "pointer-events-none");
+      card.classList.remove("scale-100");
+      card.classList.add("scale-90");
+    }
+  </script>
+</body>
+</html>
