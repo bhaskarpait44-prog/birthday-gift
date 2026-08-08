@@ -163,6 +163,20 @@
     0% { transform: scale(1); opacity: 0.9; }
     100% { transform: scale(1.1); opacity: 1; }
   }
+
+  /* Height-Aware Mobile Responsiveness for Zero Scroll */
+  @media (max-height: 740px) {
+    main { padding: 0.25rem !important; }
+    .glass-card { padding: 0.5rem 0.75rem !important; }
+    .cake-container { transform: scale(0.82) !important; margin-top: -0.25rem !important; margin-bottom: -0.25rem !important; }
+    .polaroid-img-wrapper { width: 6.5rem !important; height: 7.2rem !important; }
+    #cake-wish-message { padding: 0.4rem 0.5rem !important; margin-top: 0.25rem !important; }
+  }
+
+  @media (max-height: 620px) {
+    .cake-container { transform: scale(0.7) !important; }
+    .polaroid-img-wrapper { width: 5.5rem !important; height: 6.2rem !important; }
+  }
 </style>
 </head>
 
@@ -185,7 +199,7 @@
         </h1>
 
         <!-- 3D Layer Cake with Burning Candles -->
-        <div class="relative w-40 h-32 sm:w-44 sm:h-36 mx-auto my-1 flex flex-col items-center justify-end scale-95 sm:scale-100">
+        <div class="cake-container relative w-40 h-32 sm:w-44 sm:h-36 mx-auto my-1 flex flex-col items-center justify-end scale-95 sm:scale-100">
           <!-- Candles Row -->
           <div class="flex gap-5 mb-0.5 z-10">
             <!-- Candle 1 -->
@@ -246,7 +260,7 @@
               </div>
               
               <!-- Photo Image -->
-              <div class="w-32 h-36 sm:w-36 sm:h-40 rounded-lg overflow-hidden bg-gray-100">
+              <div class="polaroid-img-wrapper w-32 h-36 sm:w-36 sm:h-40 rounded-lg overflow-hidden bg-gray-100">
                 <img src="bh.jpg" alt="Special Memory" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
               </div>
 
