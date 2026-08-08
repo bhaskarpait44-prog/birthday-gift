@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>Happy Birthday ❤️</title>
+<title>Happy Birthday Otsur ❤️</title>
 
 <!-- Fast Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,63 +86,6 @@
     100% { transform: translateY(-20px) rotate(3deg); }
   }
 
-  /* Interactive Gift Box */
-  .gift-box {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    background: linear-gradient(135deg, #ec4899, #db2777);
-    border-radius: 16px;
-    box-shadow: 0 15px 30px rgba(236, 72, 153, 0.35);
-    transition: transform 0.3s ease;
-    margin: 0 auto;
-    cursor: pointer;
-  }
-  .gift-box:hover, .gift-box:active {
-    transform: scale(1.06);
-  }
-  .gift-lid {
-    position: absolute;
-    top: -16px;
-    left: -8px;
-    width: 136px;
-    height: 30px;
-    background: linear-gradient(135deg, #f43f5e, #e11d48);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
-    z-index: 2;
-  }
-  .gift-ribbon-v {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 100%;
-    background: #fde047;
-  }
-  .gift-ribbon-h {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100%;
-    height: 20px;
-    background: #fde047;
-  }
-  .gift-bow {
-    position: absolute;
-    top: -32px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 34px;
-    z-index: 3;
-  }
-
-  .open-lid {
-    transform: translateY(-80px) rotate(-20deg) scale(0.9);
-    opacity: 0;
-  }
-
   /* Realistic Burning Candle Flame Structure */
   .flame-container {
     position: relative;
@@ -212,17 +155,6 @@
     0% { transform: scale(1); opacity: 0.9; }
     100% { transform: scale(1.1); opacity: 1; }
   }
-
-  /* Continuous Shake Animation Until Opened */
-  .animate-shake-until-open {
-    animation: continuousShake 1.8s ease-in-out infinite;
-  }
-
-  @keyframes continuousShake {
-    0%, 100% { transform: scale(1) rotate(0deg); }
-    12%, 36%, 60%, 84% { transform: scale(1.05) rotate(-3.5deg); }
-    24%, 48%, 72%, 96% { transform: scale(1.05) rotate(3.5deg); }
-  }
 </style>
 </head>
 
@@ -237,38 +169,15 @@
     
     <div class="glass-card rounded-3xl shadow-2xl w-full p-6 sm:p-8 text-center relative border border-pink-300">
       
-      <!-- STAGE 1: UNWRAPPING THE GIFT (INITIAL HOMEPAGE VIEW) -->
-      <div id="stage-unboxing" class="text-center py-6">
+      <!-- MAIN BIRTHDAY CELEBRATION FOR OTSUR -->
+      <div class="text-center py-2">
+        
         <h1 class="text-3xl sm:text-4xl font-bold text-pink-600 font-pacifico mb-1">
           Happy Birthday!
         </h1>
-        <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-6">
-          Dear <span class="text-pink-500 underline decoration-pink-300 decoration-wavy">Someone Special ❤️</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
+          Dear <span class="text-pink-500 underline decoration-pink-300 decoration-wavy">Otsur ❤️</span>
         </h2>
-
-        <!-- Gift Box Element -->
-        <div class="my-6" onclick="unwrapGift()">
-          <div class="gift-box animate-shake-until-open" id="gift-box-elem">
-            <div class="gift-lid" id="gift-lid-elem">
-              <div class="gift-bow">🎀</div>
-            </div>
-            <div class="gift-ribbon-v"></div>
-            <div class="gift-ribbon-h"></div>
-          </div>
-        </div>
-
-        <p class="text-xs text-pink-500 font-semibold animate-pulse mt-4">✨ Tap gift box to open surprise ✨</p>
-      </div>
-
-      <!-- STAGE 2: MAKE A WISH CAKE & SURPRISE UNVEILED -->
-      <div id="stage-surprises" class="hidden text-center py-2">
-        
-        <h3 class="text-3xl sm:text-4xl font-bold text-pink-600 font-pacifico mb-1">
-          Happy Birthday!
-        </h3>
-        <h4 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
-          Dear <span class="text-pink-500 underline decoration-pink-300 decoration-wavy">Someone Special ❤️</span>
-        </h4>
 
         <!-- 3D Layer Cake with Burning Candles -->
         <div class="relative w-44 h-40 mx-auto my-3 flex flex-col items-center justify-end">
@@ -343,11 +252,11 @@
             <span class="block text-[10px] text-pink-100 opacity-90 mt-1">🔍 Tap photo to view full size</span>
           </div>
 
-          <h5 class="text-xl sm:text-2xl font-bold font-pacifico mt-3 mb-1">🎉 Wish Granted! 🎉</h5>
+          <h3 class="text-xl sm:text-2xl font-bold font-pacifico mt-3 mb-1">🎉 Happy Birthday Otsur! 🎉</h3>
           <p class="text-xs sm:text-sm font-light leading-relaxed">
             ✨ You are amazingly special.<br>
             🌸 Stay happy, stay blessed & keep shining!<br>
-            💖 Happy Birthday!
+            💖 Wishing you endless joy today & forever!
           </p>
         </div>
 
@@ -359,7 +268,7 @@
 
   <!-- FOOTER -->
   <footer class="py-4 text-center text-xs text-gray-500 relative z-20">
-    Crafted with ❤️ for a wonderful Birthday
+    Crafted with ❤️ for Otsur's Birthday
   </footer>
 
   <!-- PHOTO LIGHTBOX MODAL -->
@@ -371,7 +280,7 @@
         </svg>
       </button>
       <img src="bh.jpg" alt="Full Memory" class="w-full h-auto rounded-2xl max-h-[75vh] object-contain shadow-md">
-      <p class="text-center font-pacifico text-pink-600 text-base py-3">Dear Someone Special ❤️</p>
+      <p class="text-center font-pacifico text-pink-600 text-base py-3">Dear Otsur ❤️</p>
     </div>
   </div>
 
@@ -424,31 +333,18 @@
     }
     generateBalloons();
 
-    // Gift Unwrapping Logic
-    let isGiftOpened = false;
-    function unwrapGift() {
-      if (isGiftOpened) return;
-      isGiftOpened = true;
-
-      // Stop shaking box once opened
-      const giftBox = document.getElementById("gift-box-elem");
-      if (giftBox) giftBox.classList.remove("animate-shake-until-open");
-
-      document.getElementById("gift-lid-elem").classList.add("open-lid");
-
-      if (window.confetti) {
-        confetti({
-          particleCount: 100,
-          spread: 80,
-          origin: { y: 0.55 }
-        });
-      }
-
+    // Auto Confetti Burst on Page Load
+    window.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
-        document.getElementById("stage-unboxing").classList.add("hidden");
-        document.getElementById("stage-surprises").classList.remove("hidden");
-      }, 700);
-    }
+        if (window.confetti) {
+          confetti({
+            particleCount: 100,
+            spread: 80,
+            origin: { y: 0.55 }
+          });
+        }
+      }, 400);
+    });
 
     // Photo Lightbox Controls
     function openPhotoLightbox() {
