@@ -32,21 +32,14 @@
   .font-pacifico { font-family: 'Pacifico', cursive; }
 
   /* Mobile Optimized Glassmorphism */
-  .glass {
-    background: rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-  }
-
-  .glass-modal {
-    background: linear-gradient(rgba(255, 240, 245, 0.84), rgba(255, 240, 245, 0.84)), url('bh.jpg') center/cover no-repeat;
+  .glass-card {
+    background: linear-gradient(rgba(255, 240, 245, 0.86), rgba(255, 240, 245, 0.86)), url('bh.jpg') center/cover no-repeat;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(244, 114, 182, 0.35);
   }
 
-  /* Performance-optimized Floating Particles */
+  /* Floating Particles */
   .heart-particle {
     position: fixed;
     bottom: -30px;
@@ -239,76 +232,19 @@
   <div id="hearts-container"></div>
   <div id="balloons-container" class="fixed inset-0 pointer-events-none overflow-hidden z-10"></div>
 
-  <!-- MAIN HERO SECTION -->
-  <main class="w-full flex-1 flex flex-col items-center justify-center px-4 py-8 relative z-20 max-w-xl mx-auto">
-    <div class="glass rounded-3xl shadow-xl p-6 sm:p-10 w-full text-center border border-white/80 relative overflow-hidden my-auto">
-      
-      <!-- Ambient Glows -->
-      <div class="absolute -top-20 -left-20 w-40 h-40 bg-pink-400/25 rounded-full blur-2xl"></div>
-      <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-purple-400/25 rounded-full blur-2xl"></div>
-
-      <!-- Header Icon -->
-      <div class="relative inline-block mb-3">
-        <div class="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-tr from-pink-400 to-rose-400 rounded-full flex items-center justify-center text-4xl sm:text-5xl shadow-lg mx-auto ring-4 ring-white/80">
-          🎂
-        </div>
-        <span class="absolute -bottom-1 -right-1 bg-yellow-400 text-[10px] sm:text-xs font-bold text-gray-900 px-2.5 py-0.5 rounded-full shadow">
-          SPECIAL DAY ✨
-        </span>
-      </div>
-
-      <!-- Main Heading -->
-      <h1 class="text-4xl sm:text-6xl font-bold text-pink-600 mb-4 sm:mb-6 font-pacifico tracking-wide drop-shadow-sm">
-        Happy Birthday
-      </h1>
-
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
-        Dear <span class="text-pink-500 underline decoration-pink-300 decoration-wavy">Someone Special ❤️</span>
-      </h2>
-
-      <p class="text-gray-600 text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-6 font-light">
-        May your day be filled with love, laughter, happiness, 
-        beautiful memories, and endless smiles! You deserve every wonderful thing. ✨
-      </p>
-
-      <!-- OPEN SURPRISE BUTTON -->
-      <div class="mt-2">
-        <button id="open-surprise-btn" onclick="openSurpriseModal()" class="animate-shake-until-open w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 text-white rounded-full text-lg font-semibold shadow-xl shadow-pink-500/30 hover:scale-105 active:scale-95 transition duration-200 cursor-pointer">
-          <span class="text-xl">🎁</span>
-          <span>Open Your Surprise</span>
-          <svg class="w-5 h-5 text-yellow-300 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-          </svg>
-        </button>
-      </div>
-
-    </div>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="py-4 text-center text-xs text-gray-500 relative z-20">
-    Crafted with ❤️ for a wonderful Birthday
-  </footer>
-
-  <!-- ========================================================================= -->
-  <!-- MODAL: LIGHTWEIGHT OPEN SURPRISE -->
-  <!-- ========================================================================= -->
-  <div id="surprise-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+  <!-- MAIN HOMEPAGE CONTAINER -->
+  <main class="w-full flex-1 flex flex-col items-center justify-center px-4 py-6 relative z-20 max-w-sm sm:max-w-md mx-auto my-auto">
     
-    <!-- Modal Card -->
-    <div class="glass-modal rounded-3xl shadow-2xl max-w-sm sm:max-w-md w-full p-5 sm:p-7 relative border border-pink-300 max-h-[90vh] overflow-y-auto transform scale-95 transition-all duration-300" id="surprise-card">
+    <div class="glass-card rounded-3xl shadow-2xl w-full p-6 sm:p-8 text-center relative border border-pink-300">
       
-      <!-- Close Button (Inline SVG for Zero Dependency) -->
-      <button onclick="closeSurpriseModal()" aria-label="Close" class="absolute top-3.5 right-3.5 text-gray-500 hover:text-pink-600 p-2 rounded-full hover:bg-pink-100/60 transition">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-      </button>
-
-      <!-- STAGE 1: UNWRAPPING THE GIFT -->
-      <div id="stage-unboxing" class="text-center py-4">
-        <h3 class="text-2xl font-bold text-pink-600 font-pacifico mb-1">Tap Your Gift! 🎁</h3>
-        <p class="text-gray-600 text-xs sm:text-sm mb-6">Touch the gift box to unwrap your birthday surprise!</p>
+      <!-- STAGE 1: UNWRAPPING THE GIFT (INITIAL HOMEPAGE VIEW) -->
+      <div id="stage-unboxing" class="text-center py-6">
+        <h1 class="text-3xl sm:text-4xl font-bold text-pink-600 font-pacifico mb-1">
+          Happy Birthday!
+        </h1>
+        <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-6">
+          Dear <span class="text-pink-500 underline decoration-pink-300 decoration-wavy">Someone Special ❤️</span>
+        </h2>
 
         <!-- Gift Box Element -->
         <div class="my-6" onclick="unwrapGift()">
@@ -321,13 +257,20 @@
           </div>
         </div>
 
-        <p class="text-xs text-pink-500 font-semibold animate-pulse mt-2">✨ Tap box to open ✨</p>
+        <p class="text-xs text-pink-500 font-semibold animate-pulse mt-4">✨ Tap gift box to open surprise ✨</p>
       </div>
 
-      <!-- STAGE 2: MAKE A WISH CAKE & SURPRISE -->
+      <!-- STAGE 2: MAKE A WISH CAKE & SURPRISE UNVEILED -->
       <div id="stage-surprises" class="hidden text-center py-2">
         
-        <!-- 3D Layer Cake -->
+        <h3 class="text-3xl sm:text-4xl font-bold text-pink-600 font-pacifico mb-1">
+          Happy Birthday!
+        </h3>
+        <h4 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
+          Dear <span class="text-pink-500 underline decoration-pink-300 decoration-wavy">Someone Special ❤️</span>
+        </h4>
+
+        <!-- 3D Layer Cake with Burning Candles -->
         <div class="relative w-44 h-40 mx-auto my-3 flex flex-col items-center justify-end">
           <!-- Candles Row -->
           <div class="flex gap-6 mb-0.5 z-10">
@@ -407,10 +350,17 @@
             💖 Happy Birthday!
           </p>
         </div>
+
       </div>
 
     </div>
-  </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-4 text-center text-xs text-gray-500 relative z-20">
+    Crafted with ❤️ for a wonderful Birthday
+  </footer>
 
   <!-- PHOTO LIGHTBOX MODAL -->
   <div id="photo-lightbox" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300" onclick="closePhotoLightbox()">
@@ -474,28 +424,7 @@
     }
     generateBalloons();
 
-    // Modal Control
-    function openSurpriseModal() {
-      // Stop shaking button once clicked
-      const btn = document.getElementById("open-surprise-btn");
-      if (btn) btn.classList.remove("animate-shake-until-open");
-
-      const modal = document.getElementById("surprise-modal");
-      const card = document.getElementById("surprise-card");
-      modal.classList.remove("opacity-0", "pointer-events-none");
-      card.classList.remove("scale-95");
-      card.classList.add("scale-100");
-    }
-
-    function closeSurpriseModal() {
-      const modal = document.getElementById("surprise-modal");
-      const card = document.getElementById("surprise-card");
-      modal.classList.add("opacity-0", "pointer-events-none");
-      card.classList.remove("scale-100");
-      card.classList.add("scale-95");
-    }
-
-    // Gift Unwrapping
+    // Gift Unwrapping Logic
     let isGiftOpened = false;
     function unwrapGift() {
       if (isGiftOpened) return;
@@ -509,9 +438,9 @@
 
       if (window.confetti) {
         confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.6 }
+          particleCount: 100,
+          spread: 80,
+          origin: { y: 0.55 }
         });
       }
 
@@ -519,30 +448,6 @@
         document.getElementById("stage-unboxing").classList.add("hidden");
         document.getElementById("stage-surprises").classList.remove("hidden");
       }, 700);
-    }
-
-    // Candle Blowout Logic
-    let candlesBlown = { 1: false, 2: false, 3: false };
-
-    function blowCandle(id) {
-      if (candlesBlown[id]) return;
-      candlesBlown[id] = true;
-
-      document.getElementById(`flame-${id}`).classList.add("hidden");
-      document.getElementById(`smoke-${id}`).classList.remove("hidden");
-
-      if (candlesBlown[1] && candlesBlown[2] && candlesBlown[3]) {
-        setTimeout(() => {
-          document.getElementById("cake-wish-message").classList.remove("hidden");
-          if (window.confetti) {
-            confetti({
-              particleCount: 100,
-              spread: 80,
-              origin: { y: 0.55 }
-            });
-          }
-        }, 400);
-      }
     }
 
     // Photo Lightbox Controls
